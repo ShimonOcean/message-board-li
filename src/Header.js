@@ -7,8 +7,19 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import { useDispatch } from 'react-redux';
+import { auth } from './firebase';
+import { logout } from './features/userSlice';
 
 function Header() {
+    
+    const dispatch = useDispatch();
+
+    const logoutOfApp = () => {
+        dispatch(logout())
+        auth.signOut();
+    };
+
     return (
         <div className='header'>
 
@@ -29,7 +40,10 @@ function Header() {
                 <HeaderOption Icon={BusinessCenterIcon} title='Jobs'/>
                 <HeaderOption Icon={ChatIcon} title='Messaging'/>
                 <HeaderOption Icon={NotificationsIcon} title='Notifications'/>
-                <HeaderOption avatar="http://a.abcnews.com/images/Travel/abc_golden_subnosed_monkey_mi_130424_wblog.jpg" title='me' />
+                <HeaderOption avatar="http://a.abcnews.com/images/Travel/abc_golden_subnosed_monkey_mi_130424_wblog.jpg" 
+                title='me' 
+                onClick={logoutOfApp}
+                />
             </div>
         </div>
 
